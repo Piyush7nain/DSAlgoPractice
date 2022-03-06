@@ -20,7 +20,7 @@ public class Knapsack01 {
 
     /**
      * The Solution is similar to PartialEqualSubSum. Where we find out if a sum is possible in a given part of array.
-     * Here for each element (going left to right, we find the max possible value between the two cases, i.e. either select the
+     * Here for each element ( going left to right), we find the max possible value between the two cases, i.e. either select the
      * current element and check for max value possible with remaining weight in the array left to the current element or don't select
      * the current element and max value for total weight in the left sub array. For each elem, we run a loop to find out max value for
      * each weight less that the limit so that we can use the value for the next elem.

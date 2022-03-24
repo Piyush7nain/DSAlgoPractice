@@ -53,13 +53,13 @@ public class ThreeSum {
     // When we process nums[j] in the inner loop, we set its hashmap value to i. This indicates that we can now use nums[j] as a complement for nums[i].
     public List<List<Integer>> threeSumNoSort(int[] nums) {
 
-        Set<List<Integer>> ans = new HashSet<List<Integer>>();
+        Set<List<Integer>> ans = new HashSet<>();
         Set<Integer> dups = new HashSet<>();
         Map<Integer, Integer> map = new HashMap<>();
         for(int i = 0; i<nums.length;i++){
             if(dups.add(nums[i])){
                 for(int j = i+1; j<nums.length; ++j){
-                    int rem = 0 - nums[i] -nums[j];
+                    int rem = - nums[i] -nums[j];
                     if(map.containsKey(rem) && map.get(rem)==i){
                         List<Integer> list = Arrays.asList(rem, nums[j], nums[i]);
                         Collections.sort(list);

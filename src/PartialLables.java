@@ -39,7 +39,7 @@ public class PartialLables {
             map.get(carr[i]).add(i);
         }
         List<Integer[]> ranges = new ArrayList<>();
-        int size = ranges.size();
+        int size;
         int i;
         Integer[] range;
         for(List<Integer> value : map.values()){

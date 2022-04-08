@@ -8,12 +8,7 @@ public class KClosestPoints {
     }
     public static int[][] kClosest(int[][] points, int k) {
 
-        PriorityQueue<Double[]> pq = new PriorityQueue<>(new Comparator<Double[]>(){
-            @Override
-            public int compare(Double[] a, Double[] b){
-                return a[1].compareTo(b[1]);
-            }
-        });
+        PriorityQueue<Double[]> pq = new PriorityQueue<>((a, b) -> a[1].compareTo(b[1]));
         for(int i =0; i<points.length; i++){
             Double distance = Math.sqrt( points[i][0]*points[i][0] + points[i][1]*points[i][1]);
             Double[] point = new Double[]{Double.valueOf(i), distance};

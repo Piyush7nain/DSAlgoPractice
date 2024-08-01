@@ -1,0 +1,11 @@
+1. First look for all the case that would fail. ex.
+    if question requires to compare string, check if same length is required or not,
+    if not, first right failure case of different length.
+2. First write brute force solution.
+    then write time optimized solution.
+    then write space optimized solution.
+3. if iteration over length is required for 2 or more items, try to iterate over all in single loop.
+    ex: for (i 0--> n){
+        s[0-->n]
+        t[0-->n]
+    }

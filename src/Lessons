@@ -9,3 +9,4 @@
         s[0-->n]
         t[0-->n]
     }
+4. Dont always focus on the start of the array or string. Sometimes focus on starting from the end as well (mergeSortedArray)

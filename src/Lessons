@@ -10,3 +10,5 @@
         t[0-->n]
     }
 4. Dont always focus on the start of the array or string. Sometimes focus on starting from the end as well (mergeSortedArray)
+
+5. When you see option to create a map to store value, may be try to store in two arrays, it makes iteration more easier and visible

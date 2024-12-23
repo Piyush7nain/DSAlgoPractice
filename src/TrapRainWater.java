@@ -20,7 +20,7 @@ public class TrapRainWater {
      * and if lMax is less than current, the current is made the lMax.
      * After these the cap is calculated and added to result
      * */
-    private static void TwoPointerImpl(int[] heights ){
+    private static int TwoPointerImpl(int[] heights ){
 
         int lMax=0;  int rMax = 0;  int current;
         int finalCap =0;
@@ -42,6 +42,7 @@ public class TrapRainWater {
         }
 
         System.out.println(finalCap);
+        return finalCap;
     }
 
     /**

@@ -38,4 +38,9 @@ public class LetterCombinationOfNumber {
         map.put(9, Arrays.asList('w','x','y','z'));
 
     }
+
+    public static void main(String[] args) {
+        LetterCombinationOfNumber sol = new LetterCombinationOfNumber();
+        System.out.println(sol.letterCombinations("23"));
+    }
 }

@@ -40,8 +40,9 @@ public class BTreeFromPreOrderInOrder {
         int rootVal = preorder[preOrderIndex++];
         TreeNode root = new TreeNode(rootVal);
         int mid = map.get(rootVal);
-        root.left = build(preorder, inorder, start, mid - 1);
         root.right = build(preorder, inorder, mid + 1, end);
+        root.left = build(preorder, inorder, start, mid - 1);
+
         return root;
     }
 }

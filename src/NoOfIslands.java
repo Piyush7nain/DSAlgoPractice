@@ -1,17 +1,35 @@
 import java.util.ArrayDeque;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Queue;
 import java.util.Set;
 
 public class NoOfIslands {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         NoOfIslands temp = new NoOfIslands();
-        char[][] arr = new char[][]{{'1','1','0','0','0'},
-                                    {'1','1','0','0','0'},
-                                    {'0','0','1','0','0'},
-                                    {'0','0','0','1','1'}};
+        char[][] arr = new char[][]{
+                {'1','1','1','1','1','0','1','1','1','1','1','1','1','1','1','0','1','0','1','1'},
+                {'0','1','1','1','1','1','1','1','1','1','1','1','1','0','1','1','1','1','1','0'},
+                {'1','0','1','1','1','0','0','1','1','0','1','1','1','1','1','1','1','1','1','1'},
+                {'1','1','1','1','0','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1'},
+                {'1','0','0','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1'},
+                {'1','0','1','1','1','1','1','1','0','1','1','1','0','1','1','1','0','1','1','1'},
+                {'0','1','1','1','1','1','1','1','1','1','1','1','0','1','1','0','1','1','1','1'},
+                {'1','1','1','1','1','1','1','1','1','1','1','1','0','1','1','1','1','0','1','1'},
+                {'1','1','1','1','1','1','1','1','1','1','0','1','1','1','1','1','1','1','1','1'},
+                {'1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1'},
+                {'0','1','1','1','1','1','1','1','0','1','1','1','1','1','1','1','1','1','1','1'},
+                {'1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1'},
+                {'1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1'},
+                {'1','1','1','1','1','0','1','1','1','1','1','1','1','0','1','1','1','1','1','1'},
+                {'1','0','1','1','1','1','1','0','1','1','1','0','1','1','1','1','0','1','1','1'},
+                {'1','1','1','1','1','1','1','1','1','1','1','1','0','1','1','1','1','1','1','0'},
+                {'1','1','1','1','1','1','1','1','1','1','1','1','1','0','1','1','1','1','0','0'},
+                {'1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1'},
+                {'1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1'},
+                {'1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1'}};
         System.out.println(temp.numIslands(arr));
 
     }
@@ -19,8 +37,52 @@ public class NoOfIslands {
     int[][] visited;
     int rowM;
     int colM;
+    int noOfIslands = 0;
+    int remaining =0;
+    int[][] dir = new int[][]{{-1,0}, {0,1},{0,-1},{1,0}};
+    Queue<int[]> queue = new ArrayDeque<>();
+    // Keep adding the adjacent cells to queue if they are equal to 1. Every time a queue is emptied, island count is incremented by 1
+    public int numIslands(char[][] grid) throws InterruptedException {
+        this.grid = grid;
+        rowM = grid.length;
+        colM = grid[0].length;
+        remaining = rowM * colM;
+        visited = new int[rowM][colM];
+        for (int i = 0; i < rowM; i++) {
+            for (int j = 0; j < colM; j++) {
+                if(remaining == 0) {
+                    break;
+                }
+                if (grid[i][j] == '1' && visited[i][j] == 0) {
+                    queue.add(new int[]{i, j});
+                    while (!queue.isEmpty()) {
+                        int[] pos = queue.poll();
 
-    public int numIslands(char[][] g) {
+                        for (int[] dir : dir) {
+                            addToQueue(queue, pos[0] + dir[0], pos[1] + dir[1]);
+                        }
+                    }
+                    noOfIslands++;
+                }
+            }
+        }
+
+        return noOfIslands;
+    }
+
+    private void addToQueue(Queue<int[]> queue, int row, int col) {
+        if(row < 0 || row >= rowM || col < 0 || col >= colM) {
+            return;
+        }
+        remaining--;
+        if(visited[row][col] == 0 && grid[row][col] == '1') {
+            visited[row][col] = 1;
+            queue.add(new int[]{row, col});
+
+        }
+    }
+
+    public int numIslands2(char[][] g) {
         int ans=0;
         grid = g;
         rowM = grid.length;
@@ -53,12 +115,9 @@ public class NoOfIslands {
         }
     }
     private boolean rowRange(int i){
-
         return (i>=0 && i<rowM);
     }
-
     private boolean colRange(int i){
-
         return (i>=0 && i<colM);
     }
     private Integer[] hasLeft(Integer[] curr){
@@ -70,7 +129,6 @@ public class NoOfIslands {
         }
         return new Integer[]{};
     }
-
     private Integer[] hasRight(Integer[] curr){
 
         int row = curr[0];

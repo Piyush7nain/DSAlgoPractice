@@ -16,13 +16,13 @@ public class MaxSumSubarray {
     static long maxSubarraySum(int arr[], int n) {
 
         if(n==1)
-            return Long.valueOf(arr[0]);
+            return (long) arr[0];
 
         int current = 1;
-        long sum = Long.valueOf(arr[0]);
-        long maxSum = Long.valueOf(arr[0]);
+        long sum = arr[0];
+        long maxSum = arr[0];
         while(current<n){
-            sum = Math.max( Long.valueOf(arr[current]), sum + Long.valueOf(arr[current]) );
+            sum = Math.max(arr[current], sum + (long) arr[current]);
             maxSum = Math.max(sum,maxSum);
             current++;
         }

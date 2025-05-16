@@ -10,8 +10,8 @@ public class PartialEqualSubSum {
     static int[][] sumMem;
     public static void main(String[] args) {
 
-        int[] arr = new int[]{1,5,11,5};
-        System.out.println(solution(arr, arr.length));
+        int[] arr = new int[]{4,3,5,1,1,1,1};
+        System.out.println(solution(arr));
     }
 
     /**
@@ -20,7 +20,8 @@ public class PartialEqualSubSum {
      * i.e f(i, sum) = Math.max(f(i+1, sum-arr[i]) , f(i+1, sum))
      * We save the result in a 2D array where we store for each elem if sum less than or equal to target is present or not.
      * */
-    static int solution(int[] arr, int N){
+    static int solution(int[] arr){
+        int N = arr.length;
         target = Arrays.stream(arr).sum();
         if(target%2 !=0) return 0;
         target = target/2;

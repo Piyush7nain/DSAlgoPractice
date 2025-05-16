@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Knapsack01 {
 
 
@@ -11,11 +13,11 @@ public class Knapsack01 {
      * */
     public static void main(String[] args) {
 
-        int[] wt = new int[]{};
-        int[] val = new int[]{};
+        int[] wt = new int[] {1,2,3};
+        int[] val = new int[]{4,5,6};
         int n = wt.length;
-        int W = 0;
-        System.out.println(solution(wt, val, n, W));
+        int W = 5;
+        System.out.println(solution2(wt, val, n, W));
     }
 
     /**
@@ -47,7 +49,7 @@ public class Knapsack01 {
                 if(wt[index]> j){
                     current[j] = previous[j];
                 }else{
-                    current[j] = Math.max( previous[j], previous[j - wt[index]] + val[index]  );
+                    current[j] = Math.max( previous[j], previous[j - wt[index]] + val[index]);
                 }
             }
             previous = current;
@@ -56,4 +58,60 @@ public class Knapsack01 {
         return previous[W];
     }
 
+
+    /*
+    * Top Down Solution. Max value for a weight is max of
+    * when you include last index and add value and check for max for remaining weight
+    * or max of the same weight and excluding the last weight.
+    * For each weight, save the max value calculated by above logic for each weight we get.
+    * */
+    static int[][] mem;
+    static int[] weights;
+    static int[] vals;
+    static int solution2(int[] wt, int[] val, int n, int W){
+        mem = new int[n][W + 1];
+        weights = wt;
+        vals = val;
+        int lastIndex = n-1;
+        mem[lastIndex][W] = reverse(W,lastIndex);
+        System.out.println(Arrays.deepToString(mem));
+        return mem[lastIndex][W];
+
+    }
+    static int reverse(int remainingWeight, int lastIndex){
+        if(remainingWeight<0) return 0;
+        if(remainingWeight == 0 || lastIndex < 0) return 0;
+
+        if(mem[lastIndex][remainingWeight]!=0) return mem[lastIndex][remainingWeight];
+        if(remainingWeight< weights[lastIndex]){
+            mem[lastIndex][remainingWeight] = reverse(remainingWeight, lastIndex-1);
+        }else{
+            mem[lastIndex][remainingWeight] = Math.max(
+                    reverse(remainingWeight, lastIndex-1 ),
+                    reverse(remainingWeight-weights[lastIndex], lastIndex-1) + vals[lastIndex] );
+        }
+
+        return mem[lastIndex][remainingWeight];
+    }
+
+    static int solution3(int[] wt, int[] val, int n, int W){
+        mem = new int[n][W + 1];
+        weights = wt;
+        vals = val;
+        int lastIndex = -1;
+        return reverse(W,lastIndex+1);
+    }
+    static int forward(int remainingWeight, int lastIndex){
+        if(remainingWeight<0) return 0;
+        if(remainingWeight == 0 || lastIndex == weights.length) return 0;
+        if(mem[lastIndex][remainingWeight]!=0) return mem[lastIndex][remainingWeight];
+        if(remainingWeight< weights[lastIndex]){
+            mem[lastIndex][remainingWeight] = reverse(remainingWeight, lastIndex+1);
+        }else{
+            mem[lastIndex][remainingWeight] = Math.max(
+                    reverse(remainingWeight, lastIndex+1 ),
+                    reverse(remainingWeight-weights[lastIndex], lastIndex+1) + vals[lastIndex] );
+        }
+        return mem[lastIndex][remainingWeight];
+    }
 }

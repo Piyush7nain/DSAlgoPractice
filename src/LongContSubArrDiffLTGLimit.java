@@ -1,3 +1,8 @@
+import java.util.Comparator;
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.PriorityQueue;
+
 public class LongContSubArrDiffLTGLimit {
 
     /**
@@ -11,32 +16,35 @@ public class LongContSubArrDiffLTGLimit {
      * */
 
     public int longestSubarray(int[] arr, int limit) {
-        int res = Integer.MIN_VALUE;
-        int x = 0;
-        int y = 0;
-        int cMax = 0;
-        int cMin = 0;
-        while(x<=y && y<arr.length) {
-            if(x > cMin){
-                cMin = x;
-            }else if(x > cMax){
-                cMax = x;
-            }
-            if(arr[y] < arr[cMin] ){
-                cMin = y;
-            }else if( arr[y] > arr[cMax]){
-                cMax = y;
-            }
-            int diff = Math.abs(arr[cMax] - arr[cMin]);
-            if(diff > limit) {
-                x++;
-            }else{
-                res = Math.max(res, Math.abs(y-x +1));
-                System.out.println("Current res between " + arr[x]+" and " + arr[y]);
-                y++;
-            }
+        if(arr == null || arr.length == 0) {
+            return 0;
         }
-        return res;
+        int left = 0;
+        int ans=  0;
+        LinkedList<Integer> inc = new LinkedList<>();
+        LinkedList<Integer> dec = new LinkedList<>();
+        for(int i = 0; i < arr.length; i++) {
+            int crr = arr[i];
+            while(!inc.isEmpty() && crr < inc.getLast()) {
+                inc.removeLast();
+            }
+            inc.add(crr);
+            while(!dec.isEmpty() && crr > dec.getLast()) {
+                dec.removeLast();
+            }
+            dec.add(crr);
+            while( dec.getFirst() - inc.getFirst() > limit ) {
+                if(arr[left] == dec.peekFirst()) {
+                    dec.removeFirst();
+                }
+                if(arr[left] == inc.peekFirst()) {
+                    inc.removeFirst();
+                }
+                left++;
+            }
+            ans = Math.max(ans,i - left + 1 );
+        }
+        return ans;
     }
 
     public static void main(String[] args) {

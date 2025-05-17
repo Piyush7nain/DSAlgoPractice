@@ -4,7 +4,6 @@ public class PartialEqualSubSum {
 
     /**
      * Given an array arr[] of size N, check if it can be partitioned into two parts such that the sum of elements in both parts is the same.
-     *
      * */
     static int target;
     static int[][] sumMem;

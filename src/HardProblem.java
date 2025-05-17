@@ -45,7 +45,7 @@ public class HardProblem {
             }
         }
 
-        memo.computeIfAbsent(i, k -> new HashMap<>()).put(prev, minCost == Long.MAX_VALUE ? Long.MAX_VALUE : minCost);
+        memo.computeIfAbsent(i, k -> new HashMap<>()).put(prev, minCost);
         return minCost;
     }
 

@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.PriorityQueue;
 
 public class MinimumCostToConnectSticks {
@@ -7,7 +8,7 @@ public class MinimumCostToConnectSticks {
     }
     public static int connectSticks(int[] sticks) {
 
-        PriorityQueue<Integer> queue = new PriorityQueue<>();
+        PriorityQueue<Integer> queue = new PriorityQueue<>((a, b) -> (b-a));
             for(int i: sticks){
                 queue.offer(i);
             }

@@ -12,15 +12,15 @@ public class InOrderTraversal {
             return ans;
         }
 
-            void inOrder(TreeNode root, List<Integer> ans){
+        void inOrder(TreeNode root, List<Integer> ans){
 
-                if(root == null)
-                    return;
-                inOrder(root.left, ans);
-                ans.add(root.val);
-                inOrder(root.right, ans);
+            if(root == null)
+                return;
+            inOrder(root.left, ans);
+            ans.add(root.val);
+            inOrder(root.right, ans);
 
-            }
+        }
     }
 
 

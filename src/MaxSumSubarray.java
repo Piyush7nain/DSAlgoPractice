@@ -13,7 +13,7 @@ public class MaxSumSubarray {
      * We move from left to right. With every digit, it can either add to sum of the previous array or can itself me more than the previous array.
      * We need to consider the max of the above to case for each element.
      * */
-    static long maxSubarraySum(int arr[], int n) {
+    static long maxSubarraySum(int[] arr, int n) {
 
         if(n==1)
             return (long) arr[0];

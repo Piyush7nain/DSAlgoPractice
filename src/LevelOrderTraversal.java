@@ -3,7 +3,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-public class LeverOrderTraversal {
+public class LevelOrderTraversal {
     public List<List<Integer>> levelOrder(TreeNode root) {
 
         List<List<Integer>> ans = new LinkedList<>();

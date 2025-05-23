@@ -28,8 +28,25 @@ public class PascalTriangle {
         return prev;
     }
 
+    public List<Integer> getRow(int rowIndex) {
+        if(rowIndex == 0){
+            return new ArrayList<>(List.of(1));
+        }
+        List<Integer> row = getRow(rowIndex-1);
+        List<Integer> newRow = new ArrayList<>();
+        newRow.add(1);
+        int i = 1;
+        while(i <= rowIndex-1){
+            newRow.add(row.get(i-1) + row.get(i));
+            i++;
+        }
+        newRow.add(1);
+        return newRow;
+    }
+
     public static void main(String[] args) {
         PascalTriangle pt = new PascalTriangle();
         System.out.println(pt.generate(5));
+        System.out.println(pt.getRow(3));
     }
 }
